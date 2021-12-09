@@ -3,12 +3,12 @@ import React from "react";
 import { Pressable, View } from "react-native";
 import ContainerLayout from "../components/ContainerLayout";
 import { PRIMARY_COLOR } from "../constants/Colors";
-import { RootStackScreenProps } from "../types";
+import { AuthStackScreenProps } from "../types";
 import { authStyles as styles } from "./Register/styles.register";
 
 const LoginScreen = ({
 	navigation,
-}: RootStackScreenProps<"Root">): JSX.Element => {
+}: AuthStackScreenProps<"Login">): JSX.Element => {
 	return (
 		<ContainerLayout>
 			<View style={styles.container}>
@@ -43,7 +43,7 @@ const LoginScreen = ({
 					</Text>
 					<Pressable
 						style={{ padding: 0, marginLeft: 3 }}
-						onPress={() => navigation.navigate("Register")}
+						onPress={() => navigation.navigate("FirstRegisterScreen")}
 					>
 						<Text
 							category="s1"

@@ -15,24 +15,16 @@ import * as React from "react";
 import { ColorSchemeName } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import ChatScreen from "../screens/ChatScreen";
+import ChatScreen from "../screens/Chat";
 import DashboardHomeScreen from "../screens/DashboardHomeScreen";
-import LoginScreen from "../screens/LoginScreen";
-import ModalScreen from "../screens/ModalScreen";
 import MoreScreen from "../screens/MoreScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import PostScreen from "../screens/PostScreen";
-import FirstRegisterScreen from "../screens/Register/FirstRegisterScreen";
-import SecondRegisterScreen from "../screens/Register/SecondRegisterScreen";
-import VerificationScreen from "../screens/Register/VerificationScreen";
+import PostScreen from "../screens/Post";
 import SearchScreen from "../screens/SearchScreen";
-import {
-	RegisterStackParamList,
-	RootStackParamList,
-	RootTabParamList,
-} from "../types";
+import { RootStackParamList, RootTabParamList } from "../types";
+import AuthStackNavigator from "./AuthenticationNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function Navigation({
 	colorScheme,
 }: {
@@ -44,7 +36,18 @@ export default function Navigation({
 				linking={LinkingConfiguration}
 				theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
 			>
-				<RootNavigator />
+				<Stack.Navigator>
+					<Stack.Screen
+						options={{ headerShown: false }}
+						name="Auth"
+						component={AuthStackNavigator}
+					/>
+					<Stack.Screen
+						options={{ headerShown: false }}
+						name="Root"
+						component={BottomTabNavigator}
+					/>
+				</Stack.Navigator>
 			</NavigationContainer>
 		</React.Fragment>
 	);
@@ -54,56 +57,29 @@ export default function Navigation({
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
-const Stack = createNativeStackNavigator<RootStackParamList>();
+// const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen
-				name="Login"
-				component={LoginScreen}
-				options={{ headerShown: false, title: "Login" }}
-			/>
-			<Stack.Screen
-				name="Root"
-				component={BottomTabNavigator}
-				options={{ headerShown: false }}
-			/>
+// function RootNavigator() {
+// 	return (
+// 		<RootStack.Navigator>
+// 			<RootStack.Screen
+// 				name="Root"
+// 				component={BottomTabNavigator}
+// 				options={{ headerShown: false }}
+// 			/>
 
-			<Stack.Screen
-				name="NotFound"
-				component={NotFoundScreen}
-				options={{ title: "Oops!" }}
-			/>
-			<Stack.Screen
-				name="Register"
-				options={{ headerShown: false }}
-				component={RegisterStackNavigator}
-			/>
+// 			<RootStack.Screen
+// 				name="NotFound"
+// 				component={NotFoundScreen}
+// 				options={{ title: "Oops!" }}
+// 			/>
 
-			<Stack.Group screenOptions={{ presentation: "modal" }}>
-				<Stack.Screen name="Modal" component={ModalScreen} />
-			</Stack.Group>
-		</Stack.Navigator>
-	);
-}
-const RegisterStack = createNativeStackNavigator<RegisterStackParamList>();
-const RegisterStackNavigator = () => (
-	<Stack.Navigator screenOptions={{ headerShown: false }}>
-		<RegisterStack.Screen
-			name="FirstRegisterScreen"
-			component={FirstRegisterScreen}
-		/>
-		<RegisterStack.Screen
-			name="SecondRegisterScreen"
-			component={SecondRegisterScreen}
-		/>
-		<RegisterStack.Screen
-			name="VerificationScreen"
-			component={VerificationScreen}
-		/>
-	</Stack.Navigator>
-);
+// 			{/* <RootStack.Group screenOptions={{ presentation: "modal" }}>
+// 				<RootStack.Screen name="Modal" component={ModalScreen} />
+// 			</RootStack.Group> */}
+// 		</RootStack.Navigator>
+// 	);
+// }
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.

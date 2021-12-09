@@ -2,7 +2,7 @@ import { Button, Radio, Text } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import ContainerLayout from "../../components/ContainerLayout";
-import { RegisterStackScreenProps } from "../../types";
+import { AuthStackScreenProps } from "../../types";
 import { authStyles as styles } from "./styles.register";
 
 const fields = [
@@ -15,7 +15,7 @@ const fields = [
 
 const FirstRegisterScreen = ({
 	navigation,
-}: RegisterStackScreenProps<"SecondRegisterScreen">) => {
+}: AuthStackScreenProps<"FirstRegisterScreen">) => {
 	const [selectedField, setSelectedField] = useState("");
 	return (
 		<ContainerLayout>

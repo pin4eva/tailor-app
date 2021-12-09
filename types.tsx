@@ -21,15 +21,14 @@ export type RootStackParamList = {
 	Modal: undefined;
 	NotFound: undefined;
 	Login: undefined;
-	Register: NavigatorScreenParams<RegisterStackParamList> | undefined;
+	Auth: NavigatorScreenParams<AuthStackParamList> | undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 	NativeStackScreenProps<RootStackParamList, Screen>;
 
-export type RegisterStackScreenProps<
-	Screen extends keyof RegisterStackParamList,
-> = NativeStackScreenProps<RegisterStackParamList, Screen>;
+export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> =
+	NativeStackScreenProps<AuthStackParamList, Screen>;
 
 export type RootTabParamList = {
 	TabOne: undefined;
@@ -41,10 +40,12 @@ export type RootTabParamList = {
 	More: undefined;
 };
 
-export type RegisterStackParamList = {
+export type AuthStackParamList = {
+	Login: undefined;
 	FirstRegisterScreen: undefined;
 	SecondRegisterScreen: undefined;
 	VerificationScreen: undefined;
+	Root: NavigatorScreenParams<RootTabParamList> | undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

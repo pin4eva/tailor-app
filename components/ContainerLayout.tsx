@@ -26,5 +26,6 @@ export default ContainerLayout;
 const styles = StyleSheet.create({
 	container: {
 		marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
+		flexShrink: 1,
 	},
 });
